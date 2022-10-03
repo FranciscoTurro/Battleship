@@ -1,13 +1,15 @@
 const ship = (n) => {
   let length = n;
-  let hitSpots = Array(n).fill(0);
+  let hitSpots = [];
 
-  const hit = (n) => {
-    hitSpots[n] = 1;
+  const hit = (pos) => {
+    if (hitSpots.includes(pos)) return;
+    hitSpots.push(pos);
   };
 
   const isSunk = () => {
-    return hitSpots.every((val) => val === 1); //returns true or false
+    if (hitSpots.length == length) return true;
+    else return false;
   };
 
   return { length, isSunk, hit, hitSpots };
