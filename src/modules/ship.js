@@ -1,18 +1,18 @@
 const ship = (n) => {
   let length = n;
-  let hitSpots = [];
+  let hits = [];
 
   const hit = (pos) => {
-    if (hitSpots.includes(pos)) return;
-    hitSpots.push(pos);
+    if (pos > length || hits.includes(pos)) return;
+    hits.push(pos);
   };
 
   const isSunk = () => {
-    if (hitSpots.length == length) return true;
+    if (hits.length === length) return true;
     else return false;
   };
 
-  return { length, isSunk, hit, hitSpots };
+  return { length, hits, hit, isSunk };
 };
 
 export default ship;
