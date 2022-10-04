@@ -25,7 +25,9 @@ test('Can place ships at specific coordinates horizontally', () => {
   ).toBeTruthy();
 });
 
-// test('Cant place ships if there is already one', () => {});
+test('Cant place ships if space is occupied', () => {});
+
+test('Cant place ships if it would overflow the board', () => {});
 
 // test('An attack hits a ship', () => {});
 
