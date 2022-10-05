@@ -25,9 +25,36 @@ test('Can place ships at specific coordinates horizontally', () => {
   ).toBeTruthy();
 });
 
-test('Cant place ships if space is occupied', () => {});
+test('Cant place ships if space is occupied', () => {
+  let gameboard = gameBoard();
+  gameboard.initBoard();
+  gameboard.placeShip(2, 1, ship(3), 'v');
+  expect(
+    gameboard.board[2][1] && gameboard.board[2][2] && gameboard.board[2][3]
+  ).toBeTruthy();
+});
 
-test('Cant place ships if it would overflow the board', () => {});
+test('Cant place ships on reserved space', () => {
+  let gameboard = gameBoard();
+  gameboard.initBoard();
+  gameboard.placeShip(2, 1, ship(3), 'v');
+  gameboard.placeShip(2, 0, ship(1), 'v');
+  expect(gameboard.board[2][0]).not.toBeTruthy();
+});
+
+test('Cant place ships if it would overflow the board (v)', () => {
+  let gameboard = gameBoard();
+  gameboard.initBoard();
+  gameboard.placeShip(2, 1, ship(11), 'v');
+  expect(gameboard.board[2][1]).not.toBeTruthy();
+});
+
+test('Cant place ships if it would overflow the board (h)', () => {
+  let gameboard = gameBoard();
+  gameboard.initBoard();
+  gameboard.placeShip(7, 9, ship(4), 'h');
+  expect(gameboard.board[7][9]).not.toBeTruthy();
+});
 
 // test('An attack hits a ship', () => {});
 
