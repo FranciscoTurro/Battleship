@@ -65,10 +65,50 @@ test('Cant place ships if it would overflow the board (h)', () => {
   expect(gameboard.board[7][9]).not.toBeTruthy();
 });
 
-// test('An attack hits a ship', () => {});
+test('An attack hits a ship', () => {
+  let gameboard = gameBoard();
+  gameboard.initBoard();
+  gameboard.placeShip(0, 0, ship(2), 'h');
+  gameboard.receiveAttack(0, 0);
+  expect(gameboard.board[0][0].ship.hits).toEqual([0]);
+});
 
-// test('An attack misses a ship', () => {});
+test('An attack misses a ship', () => {
+  let gameboard = gameBoard();
+  gameboard.initBoard();
+  gameboard.receiveAttack(3, 2);
+  expect(gameboard.missedShots).toEqual([[3, 2]]);
+});
 
-// test('Board keeps track of missed shots', () => {});
+test('Board keeps track of missed shots', () => {
+  let gameboard = gameBoard();
+  gameboard.initBoard();
+  gameboard.receiveAttack(3, 2);
+  gameboard.placeShip(0, 0, ship(2), 'h');
+  gameboard.receiveAttack(0, 2);
+  expect(gameboard.missedShots).toEqual([
+    [3, 2],
+    [0, 2],
+  ]);
+});
 
-// test('All ships on the board have been sunk', () => {});
+test('All ships on the board have been sunk', () => {
+  let gameboard = gameBoard();
+  gameboard.initBoard();
+  gameboard.placeShip(0, 0, ship(2), 'h');
+  gameboard.placeShip(3, 4, ship(1), 'h');
+  gameboard.receiveAttack(0, 0);
+  gameboard.receiveAttack(1, 0);
+  gameboard.receiveAttack(3, 4);
+  expect(gameboard.allShipsSunk()).toBeTruthy();
+});
+
+test('All ships on the board have not been sunk', () => {
+  let gameboard = gameBoard();
+  gameboard.initBoard();
+  gameboard.placeShip(0, 0, ship(2), 'h');
+  gameboard.placeShip(3, 4, ship(1), 'h');
+  gameboard.receiveAttack(0, 0);
+  gameboard.receiveAttack(1, 0);
+  expect(gameboard.allShipsSunk()).not.toBeTruthy();
+});

@@ -1,5 +1,7 @@
 const gameBoard = () => {
   let board = [];
+  let missedShots = [];
+  let placedShips = [];
 
   const initBoard = () => {
     for (let i = 0; i < 10; i++) {
@@ -17,6 +19,7 @@ const gameBoard = () => {
 
     if (orientation === 'h') {
       if (ship.length + xCoord > 10) return;
+      placedShips.push([xCoord, yCoord]);
       for (let i = xCoord; i < xCoord + ship.length; i++) {
         board[i][yCoord] = { ship, pos };
         reserveAround(xCoord, yCoord + pos);
@@ -25,6 +28,7 @@ const gameBoard = () => {
     }
     if (orientation === 'v') {
       if (ship.length + yCoord > 10) return;
+      placedShips.push([xCoord, yCoord]);
       for (let i = yCoord; i < yCoord + ship.length; i++) {
         board[xCoord][i] = { ship, pos };
         reserveAround(xCoord + pos, yCoord);
@@ -49,7 +53,29 @@ const gameBoard = () => {
     reserveCell(1);
   };
 
-  return { board, initBoard, placeShip };
+  const receiveAttack = (xCoord, yCoord) => {
+    if (board[xCoord][yCoord] && board[xCoord][yCoord] !== 'reserved')
+      board[xCoord][yCoord].ship.hit(board[xCoord][yCoord].pos);
+    else missedShots.push([xCoord, yCoord]);
+  };
+
+  const allShipsSunk = () => {
+    let allSunk = true;
+    placedShips.forEach((element) => {
+      if (!board[element[0]][element[1]].ship.isSunk()) allSunk = false;
+    });
+    return allSunk;
+  };
+
+  return {
+    board,
+    initBoard,
+    placeShip,
+    missedShots,
+    receiveAttack,
+    placedShips,
+    allShipsSunk,
+  };
 };
 
 export default gameBoard;
