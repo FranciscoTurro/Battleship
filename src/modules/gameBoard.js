@@ -3,14 +3,14 @@ const gameBoard = () => {
   let missedShots = [];
   let placedShips = [];
 
-  const initBoard = () => {
+  const initBoard = (() => {
     for (let i = 0; i < 10; i++) {
       board[i] = [];
       for (let j = 0; j < 10; j++) {
         board[i].push(false);
       }
     }
-  };
+  })();
 
   const placeShip = (xCoord, yCoord, ship, orientation) => {
     if (board[xCoord][yCoord]) return;
@@ -69,7 +69,6 @@ const gameBoard = () => {
 
   return {
     board,
-    initBoard,
     placeShip,
     missedShots,
     receiveAttack,
