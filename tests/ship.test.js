@@ -1,4 +1,4 @@
-import ship from '../src/modules/ship';
+import ship from '../src/modules/ship.js';
 
 test('Ship has length', () => {
   expect(ship(3).length).toBe(3);

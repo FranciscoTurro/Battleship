@@ -1,4 +1,4 @@
-import gameBoard from './gameBoard';
+import gameBoard from './gameBoard.js';
 
 const player = (n) => {
   const name = n;
@@ -6,10 +6,16 @@ const player = (n) => {
   let turn = false;
 
   const setTurn = (enemy) => {
-    turn = true;
+    obj.turn = true;
     enemy.turn = false;
   };
-  return { name, board, turn, setTurn };
+  const obj = {
+    name,
+    board,
+    turn,
+    setTurn,
+  };
+  return obj;
 };
 
 export default player;

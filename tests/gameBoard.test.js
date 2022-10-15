@@ -1,5 +1,5 @@
-import gameBoard from '../src/modules/gameBoard';
-import ship from '../src/modules/ship';
+import gameBoard from '../src/modules/gameBoard.js';
+import ship from '../src/modules/ship.js';
 
 test('Creates a 10x10 board', () => {
   let gameboard = gameBoard();
