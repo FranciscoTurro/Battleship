@@ -2,6 +2,7 @@ const gameBoard = () => {
   let board = [];
   let missedShots = [];
   let placedShips = [];
+  let hitShots = [];
 
   const initBoard = (() => {
     for (let i = 0; i < 10; i++) {
@@ -54,9 +55,13 @@ const gameBoard = () => {
   };
 
   const receiveAttack = (xCoord, yCoord) => {
-    if (board[xCoord][yCoord] && board[xCoord][yCoord] !== 'reserved')
+    if (board[xCoord][yCoord] && board[xCoord][yCoord] !== 'reserved') {
       board[xCoord][yCoord].ship.hit(board[xCoord][yCoord].pos);
-    else missedShots.push([xCoord, yCoord]);
+      hitShots.push([xCoord, yCoord]);
+    } else {
+      missedShots.push([xCoord, yCoord]);
+      board[xCoord][yCoord] = 'missed';
+    }
   };
 
   const allShipsSunk = () => {
@@ -74,6 +79,7 @@ const gameBoard = () => {
     receiveAttack,
     placedShips,
     allShipsSunk,
+    hitShots,
   };
 };
 

@@ -99,3 +99,14 @@ test('All ships on the board have not been sunk', () => {
   gameboard.receiveAttack(1, 0);
   expect(gameboard.allShipsSunk()).not.toBeTruthy();
 });
+
+test('Keeps track of attacks that hit ships', () => {
+  let gameboard = gameBoard();
+  gameboard.placeShip(3, 4, ship(3), 'h');
+  gameboard.receiveAttack(3, 4);
+  gameboard.receiveAttack(4, 4);
+  expect(gameboard.hitShots).toEqual([
+    [3, 4],
+    [4, 4],
+  ]);
+});

@@ -1,0 +1,19 @@
+.board {
+  border: 1px solid black;
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  width: 300px;
+  height: 300px;
+}
+
+.row-p1,
+.row-p2 {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  border: 1px solid black;
+}
+
+.cell-p1,
+.cell-p2 {
+  border: 1px solid black;
+}
