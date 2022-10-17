@@ -1,5 +1,8 @@
 import './styles.css';
 import player from './modules/player.js';
+import ship from './modules/ship.js';
+
+const fleet = [ship(5), ship(4), ship(3), ship(3), ship(2)];
 
 const makeTwoBoards = (p1, p2) => {
   //SAME CODE TWO TIMES LIKE A NEANDERTHAL, TRY TO KEEP IT DRY
@@ -33,9 +36,45 @@ const makeTwoBoards = (p1, p2) => {
       cell.setAttribute('id', `p2-row${i}-cell${foreachIndex}`);
       row.appendChild(cell);
 
-      cell.addEventListener('click', () => {
-        p2.board.receiveAttack(i, foreachIndex);
+      cell.addEventListener('click', (e) => {
+        let attack = p2.board.receiveAttack(i, foreachIndex);
+        if (attack === 'hit') e.target.classList.add('hit');
+        if (attack === 'miss') e.target.classList.add('miss');
       });
     });
   }
 };
+
+// const placeShipsAtRandom = (board) => {
+//   var orientations = ['v', 'h'];
+//   fleet.forEach((ship) => {
+//     board.placeShip(
+//       Math.floor(Math.random() * 10),
+//       Math.floor(Math.random() * 10),
+//       ship,
+//       orientations[Math.floor(Math.random() * orientations.length)]
+//     );
+//   });
+// };
+
+const placeShipsAtRandom = (board) => {
+  var orientations = ['v', 'h'];
+  for (let i = 0; i < 5; i++) {
+    while (board.placedShips.length !== i) {
+      board.placeShip(
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        fleet[i],
+        orientations[Math.floor(Math.random() * orientations.length)]
+      );
+    }
+  }
+};
+
+const p1 = player('p1');
+const p2 = player('p2');
+
+makeTwoBoards(p1, p2);
+
+placeShipsAtRandom(p2.board);
+console.log(p2.board);

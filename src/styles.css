@@ -17,3 +17,7 @@
 .cell-p2 {
   border: 1px solid black;
 }
+
+.hit {
+  background-color: black;
+}

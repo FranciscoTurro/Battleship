@@ -20,6 +20,11 @@ const gameBoard = () => {
 
     if (orientation === 'h') {
       if (ship.length + xCoord > 10) return;
+
+      for (let i = 0; i < ship.length; i++) {
+        if (board[xCoord + i][yCoord] === 'reserved') return;
+      }
+
       placedShips.push([xCoord, yCoord]);
       for (let i = xCoord; i < xCoord + ship.length; i++) {
         board[i][yCoord] = { ship, pos };
@@ -29,6 +34,11 @@ const gameBoard = () => {
     }
     if (orientation === 'v') {
       if (ship.length + yCoord > 10) return;
+
+      for (let i = 0; i < ship.length; i++) {
+        if (board[xCoord][yCoord + i] === 'reserved') return;
+      }
+
       placedShips.push([xCoord, yCoord]);
       for (let i = yCoord; i < yCoord + ship.length; i++) {
         board[xCoord][i] = { ship, pos };
@@ -55,12 +65,15 @@ const gameBoard = () => {
   };
 
   const receiveAttack = (xCoord, yCoord) => {
-    if (board[xCoord][yCoord] && board[xCoord][yCoord] !== 'reserved') {
+    if (board[xCoord][yCoord] === 'reserved') return 'nothing';
+    if (board[xCoord][yCoord] && board[xCoord][yCoord] !== 'missed') {
       board[xCoord][yCoord].ship.hit(board[xCoord][yCoord].pos);
       hitShots.push([xCoord, yCoord]);
+      return 'hit';
     } else {
       missedShots.push([xCoord, yCoord]);
       board[xCoord][yCoord] = 'missed';
+      return 'miss';
     }
   };
 

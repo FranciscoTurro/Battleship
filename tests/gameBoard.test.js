@@ -73,7 +73,6 @@ test('An attack misses a ship', () => {
 test('Board keeps track of missed shots', () => {
   let gameboard = gameBoard();
   gameboard.receiveAttack(3, 2);
-  gameboard.placeShip(0, 0, ship(2), 'h');
   gameboard.receiveAttack(0, 2);
   expect(gameboard.missedShots).toEqual([
     [3, 2],
