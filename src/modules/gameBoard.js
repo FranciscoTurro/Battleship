@@ -19,20 +19,6 @@ const gameBoard = () => {
     let pos = 0;
 
     if (orientation === 'h') {
-      if (ship.length + xCoord > 10) return;
-
-      for (let i = 0; i < ship.length; i++) {
-        if (board[xCoord + i][yCoord] === 'reserved') return;
-      }
-
-      placedShips.push([xCoord, yCoord]);
-      for (let i = xCoord; i < xCoord + ship.length; i++) {
-        board[i][yCoord] = { ship, pos };
-        reserveAround(xCoord, yCoord + pos);
-        pos++;
-      }
-    }
-    if (orientation === 'v') {
       if (ship.length + yCoord > 10) return;
 
       for (let i = 0; i < ship.length; i++) {
@@ -42,6 +28,20 @@ const gameBoard = () => {
       placedShips.push([xCoord, yCoord]);
       for (let i = yCoord; i < yCoord + ship.length; i++) {
         board[xCoord][i] = { ship, pos };
+        reserveAround(xCoord, yCoord + pos);
+        pos++;
+      }
+    }
+    if (orientation === 'v') {
+      if (ship.length + xCoord > 10) return;
+
+      for (let i = 0; i < ship.length; i++) {
+        if (board[xCoord + i][yCoord] === 'reserved') return;
+      }
+
+      placedShips.push([xCoord, yCoord]);
+      for (let i = xCoord; i < xCoord + ship.length; i++) {
+        board[i][yCoord] = { ship, pos };
         reserveAround(xCoord + pos, yCoord);
         pos++;
       }

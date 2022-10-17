@@ -10,7 +10,7 @@ test('Can place ships at specific coordinates horizontally', () => {
   let gameboard = gameBoard();
   gameboard.placeShip(2, 1, ship(3), 'h');
   expect(
-    gameboard.board[2][1] && gameboard.board[3][1] && gameboard.board[4][1]
+    gameboard.board[2][1] && gameboard.board[2][2] && gameboard.board[2][3]
   ).toBeTruthy();
 });
 
@@ -18,16 +18,15 @@ test('Can place ships at specific coordinates vertically', () => {
   let gameboard = gameBoard();
   gameboard.placeShip(2, 1, ship(3), 'v');
   expect(
-    gameboard.board[2][1] && gameboard.board[2][2] && gameboard.board[2][3]
+    gameboard.board[2][1] && gameboard.board[3][1] && gameboard.board[4][1]
   ).toBeTruthy();
 });
 
 test('Cant place ships if space is occupied', () => {
   let gameboard = gameBoard();
-  gameboard.placeShip(2, 1, ship(3), 'v');
-  expect(
-    gameboard.board[2][1] && gameboard.board[2][2] && gameboard.board[2][3]
-  ).toBeTruthy();
+  gameboard.placeShip(2, 1, ship(3), 'h');
+  gameboard.placeShip(1, 1, ship(3), 'h');
+  expect(gameboard.board[1][1]).toEqual('reserved');
 });
 
 test('Cant place ships on reserved space', () => {
@@ -85,7 +84,7 @@ test('All ships on the board have been sunk', () => {
   gameboard.placeShip(0, 0, ship(2), 'h');
   gameboard.placeShip(3, 4, ship(1), 'h');
   gameboard.receiveAttack(0, 0);
-  gameboard.receiveAttack(1, 0);
+  gameboard.receiveAttack(0, 1);
   gameboard.receiveAttack(3, 4);
   expect(gameboard.allShipsSunk()).toBeTruthy();
 });
@@ -103,9 +102,17 @@ test('Keeps track of attacks that hit ships', () => {
   let gameboard = gameBoard();
   gameboard.placeShip(3, 4, ship(3), 'h');
   gameboard.receiveAttack(3, 4);
-  gameboard.receiveAttack(4, 4);
+  gameboard.receiveAttack(3, 5);
   expect(gameboard.hitShots).toEqual([
     [3, 4],
-    [4, 4],
+    [3, 5],
   ]);
+});
+
+test('Cant place a ship on usable space if the length will reach reserved space', () => {
+  let gameboard = gameBoard();
+  gameboard.placeShip(1, 2, ship(1), 'h');
+  gameboard.placeShip(0, 0, ship(3), 'h');
+  console.log(gameboard.board);
+  expect(gameboard.board[0][0]).toBe(false);
 });
