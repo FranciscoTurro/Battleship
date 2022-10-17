@@ -2,7 +2,7 @@ import './styles.css';
 import player from './modules/player.js';
 import ship from './modules/ship.js';
 
-const fleet = [ship(5), ship(4), ship(3), ship(3), ship(2)];
+const fleet = [null, ship(5), ship(4), ship(3), ship(3), ship(2)];
 
 const makeTwoBoards = (p1, p2) => {
   //SAME CODE TWO TIMES LIKE A NEANDERTHAL, TRY TO KEEP IT DRY
@@ -59,7 +59,7 @@ const makeTwoBoards = (p1, p2) => {
 
 const placeShipsAtRandom = (board) => {
   var orientations = ['v', 'h'];
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     while (board.placedShips.length !== i) {
       board.placeShip(
         Math.floor(Math.random() * 10),
