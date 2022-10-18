@@ -2,7 +2,11 @@ import './styles.css';
 import player from './modules/player.js';
 import ship from './modules/ship.js';
 
-import { placeShipsAtRandom, makeTwoBoards } from './modules/dom.js';
+import {
+  placeShipsAtRandom,
+  makeTwoBoards,
+  updateBoard,
+} from './modules/dom.js';
 
 const p1 = player('p1');
 const p2 = player('p2');
@@ -45,8 +49,10 @@ addButton.addEventListener('click', () => {
           if (shipSelector.options[i].value == 'carrier')
             shipSelector.remove(i);
         }
+        updateBoard(p1.board.board);
       }
       break;
+
     case 'battleship':
       if (
         p1.board.placeShip(
@@ -60,6 +66,7 @@ addButton.addEventListener('click', () => {
           if (shipSelector.options[i].value == 'battleship')
             shipSelector.remove(i);
         }
+        updateBoard(p1.board.board);
       }
       break;
 
@@ -76,6 +83,7 @@ addButton.addEventListener('click', () => {
           if (shipSelector.options[i].value == 'destroyer')
             shipSelector.remove(i);
         }
+        updateBoard(p1.board.board);
       }
       break;
 
@@ -92,6 +100,7 @@ addButton.addEventListener('click', () => {
           if (shipSelector.options[i].value == 'submarine')
             shipSelector.remove(i);
         }
+        updateBoard(p1.board.board);
       }
       break;
 
@@ -107,6 +116,7 @@ addButton.addEventListener('click', () => {
         for (let i = 0; i < shipSelector.length; i++) {
           if (shipSelector.options[i].value == 'patrol') shipSelector.remove(i);
         }
+        updateBoard(p1.board.board);
       }
       break;
   }
