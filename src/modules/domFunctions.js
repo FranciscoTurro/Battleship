@@ -33,7 +33,6 @@ const makeTwoBoards = (p1, p2) => {
       row.appendChild(cell);
 
       cell.addEventListener('click', (e) => {
-        console.log(e);
         let attack = p2.board.receiveAttack(i, foreachIndex);
         if (attack === 'hit') e.target.classList.add('hit');
         if (attack === 'miss') e.target.classList.add('miss');
@@ -58,8 +57,8 @@ const placeShipsAtRandom = (board) => {
 };
 
 const updateBoard = (board) => {
-  for (let i = 0; i < 9; i++) {
-    for (let j = 0; j < 9; j++) {
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
       if (board[i][j] !== 'reserved' && board[i][j] !== false) {
         document.getElementById(`p1-row${i}-cell${j}`).classList.add('hit');
       }
@@ -67,4 +66,19 @@ const updateBoard = (board) => {
   }
 };
 
-export { placeShipsAtRandom, makeTwoBoards, updateBoard };
+const updateBoardTroubleshooting = (board) => {
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      if (board[i][j] !== 'reserved' && board[i][j] !== false) {
+        document.getElementById(`p2-row${i}-cell${j}`).classList.add('hit');
+      }
+    }
+  }
+};
+
+export {
+  placeShipsAtRandom,
+  makeTwoBoards,
+  updateBoard,
+  updateBoardTroubleshooting,
+};

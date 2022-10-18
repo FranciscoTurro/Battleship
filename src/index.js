@@ -6,7 +6,8 @@ import {
   placeShipsAtRandom,
   makeTwoBoards,
   updateBoard,
-} from './modules/dom.js';
+  updateBoardTroubleshooting,
+} from './modules/domFunctions.js';
 
 const p1 = player('p1');
 const p2 = player('p2');
