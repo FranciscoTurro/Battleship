@@ -29,6 +29,18 @@ test('Cant place ships if space is occupied', () => {
   expect(gameboard.board[1][1]).toEqual('reserved');
 });
 
+test('Cant place ships on another ship', () => {
+  let gameboard = gameBoard();
+  gameboard.placeShip(2, 1, ship(3), 'h');
+  expect(gameboard.placeShip(2, 1, ship(1), 'h')).not.toBeTruthy();
+});
+
+test('Cant place ships on another ship (length case)', () => {
+  let gameboard = gameBoard();
+  gameboard.placeShip(2, 1, ship(3), 'h');
+  expect(gameboard.placeShip(0, 2, ship(4), 'v')).not.toBeTruthy();
+});
+
 test('Cant place ships on reserved space', () => {
   let gameboard = gameBoard();
   gameboard.placeShip(2, 1, ship(2), 'v');

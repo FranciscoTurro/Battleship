@@ -11,6 +11,7 @@
     <br />
     <div id="board2" class="board"></div>
     <button class="modalButton">open modal</button>
+
     <div id="modalContainer">
       <div class="modal">
         <div class="shipToPlace"></div>
@@ -19,6 +20,13 @@
         <select id="orientation">
           <option value="h">Horizontal</option>
           <option value="v">Vertical</option>
+        </select>
+        <select id="shipSelector">
+          <option value="carrier">Carrier (length 5)</option>
+          <option value="battleship">Battleship (length 4)</option>
+          <option value="destroyer">Destroyer (length 3)</option>
+          <option value="submarine">Submarine (length 3)</option>
+          <option value="patrol">Patrol boat (length 2)</option>
         </select>
         <button id="addButton">Place ship</button>
       </div>

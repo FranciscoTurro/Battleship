@@ -58,6 +58,4 @@ const placeShipsAtRandom = (board) => {
   }
 };
 
-const placeShipsUser = (board) => {};
-
 export { placeShipsAtRandom, makeTwoBoards };

@@ -19,10 +19,10 @@ const gameBoard = () => {
     let pos = 0;
 
     if (orientation === 'h') {
-      if (ship.length + yCoord > 10) return;
+      if (ship.length + yCoord > 10) return false;
 
       for (let i = 0; i < ship.length; i++) {
-        if (board[xCoord][yCoord + i] === 'reserved') return;
+        if (board[xCoord][yCoord + i] === 'reserved') return false;
       }
 
       placedShips.push([xCoord, yCoord]);
@@ -31,12 +31,13 @@ const gameBoard = () => {
         reserveAround(xCoord, yCoord + pos);
         pos++;
       }
+      return true;
     }
     if (orientation === 'v') {
-      if (ship.length + xCoord > 10) return;
+      if (ship.length + xCoord > 10) return false;
 
       for (let i = 0; i < ship.length; i++) {
-        if (board[xCoord + i][yCoord] === 'reserved') return;
+        if (board[xCoord + i][yCoord] === 'reserved') return false;
       }
 
       placedShips.push([xCoord, yCoord]);
@@ -45,6 +46,7 @@ const gameBoard = () => {
         reserveAround(xCoord + pos, yCoord);
         pos++;
       }
+      return true;
     }
   };
 
