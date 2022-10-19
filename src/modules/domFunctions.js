@@ -15,8 +15,6 @@ const makeTwoBoards = (p1, p2) => {
       cell.classList.add('cell-p1');
       cell.setAttribute('id', `p1-row${i}-cell${foreachIndex}`);
       row.appendChild(cell);
-
-      cell.addEventListener('click', () => {});
     });
   }
 
@@ -33,9 +31,13 @@ const makeTwoBoards = (p1, p2) => {
       row.appendChild(cell);
 
       cell.addEventListener('click', (e) => {
-        let attack = p2.board.receiveAttack(i, foreachIndex);
-        if (attack === 'hit') e.target.classList.add('hit');
-        if (attack === 'miss') e.target.classList.add('miss');
+        if (p1.turn === true) {
+          let attack = p2.board.receiveAttack(i, foreachIndex);
+          if (attack === 'hit') e.target.classList.add('hit');
+          if (attack !== 'hit') e.target.classList.add('miss');
+          p2.setTurn(p1);
+          p2Moves(p1, p2);
+        }
       });
     });
   }
@@ -76,9 +78,35 @@ const updateBoardTroubleshooting = (board) => {
   }
 };
 
+const shipSelector = document.querySelector('#shipSelector');
+const modalButton = document.querySelector('.modalButton');
+const modalContainer = document.querySelector('#modalContainer');
+const checkShipsDone = () => {
+  if (shipSelector.options.length === 0) {
+    modalContainer.style.display = 'none';
+    modalButton.classList.add('hide');
+  }
+};
+
+const p2Moves = (p1, p2) => {
+  const ran1 = Math.floor(Math.random() * 9);
+  const ran2 = Math.floor(Math.random() * 9);
+  if (p1.board.receiveAttack(ran1, ran2) !== 'hit') {
+    document.getElementById(`p1-row${ran1}-cell${ran2}`).classList.add('miss');
+  } else {
+    document
+      .getElementById(`p1-row${ran1}-cell${ran2}`)
+      .classList.add('hitOwn');
+  }
+  console.log(p1.board);
+  console.log(p2.board);
+  p1.setTurn(p2);
+};
+
 export {
   placeShipsAtRandom,
   makeTwoBoards,
   updateBoard,
   updateBoardTroubleshooting,
+  checkShipsDone,
 };

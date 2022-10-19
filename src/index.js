@@ -7,6 +7,7 @@ import {
   makeTwoBoards,
   updateBoard,
   updateBoardTroubleshooting,
+  checkShipsDone,
 } from './modules/domFunctions.js';
 
 const p1 = player('p1');
@@ -24,12 +25,8 @@ const shipSelector = document.querySelector('#shipSelector');
 
 modalButton.addEventListener('click', () => {
   modalContainer.style.display = 'block'; //makes the modal appear
-});
-
-window.addEventListener('click', (e) => {
-  if (e.target == modalContainer) {
-    modalContainer.style.display = 'none'; //makes the modal dissappear if i click outside of it
-  }
+  placeShipsAtRandom(p2.board);
+  p1.setTurn(p2);
 });
 
 addButton.addEventListener('click', () => {
@@ -51,6 +48,7 @@ addButton.addEventListener('click', () => {
             shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
+        checkShipsDone();
       }
       break;
 
@@ -68,6 +66,7 @@ addButton.addEventListener('click', () => {
             shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
+        checkShipsDone();
       }
       break;
 
@@ -85,6 +84,7 @@ addButton.addEventListener('click', () => {
             shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
+        checkShipsDone();
       }
       break;
 
@@ -102,6 +102,7 @@ addButton.addEventListener('click', () => {
             shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
+        checkShipsDone();
       }
       break;
 
@@ -118,6 +119,7 @@ addButton.addEventListener('click', () => {
           if (shipSelector.options[i].value == 'patrol') shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
+        checkShipsDone();
       }
       break;
   }

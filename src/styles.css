@@ -22,6 +22,14 @@
   background-color: black;
 }
 
+.hitOwn {
+  background-color: pink;
+}
+
+.miss {
+  background-color: red;
+}
+
 #modalContainer {
   width: 100%;
   height: 100%;
