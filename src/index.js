@@ -9,12 +9,15 @@ import {
   updateBoard,
   updateBoardTroubleshooting,
   checkShipsDone,
+  makePVboard,
+  updatePVboard,
 } from './modules/domFunctions.js';
 
 const p1 = player('p1');
 const p2 = player('p2');
 
 makeTwoBoards(p1, p2);
+makePVboard(p1);
 
 const modalContainer = document.querySelector('#modalContainer');
 const modalButton = document.querySelector('.modalButton');
@@ -50,6 +53,7 @@ addButton.addEventListener('click', () => {
             shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
+        updatePVboard(p1.board.board);
         checkShipsDone(p1, p2);
       }
       break;
@@ -68,6 +72,7 @@ addButton.addEventListener('click', () => {
             shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
+        updatePVboard(p1.board.board);
         checkShipsDone(p1, p2);
       }
       break;
@@ -86,6 +91,7 @@ addButton.addEventListener('click', () => {
             shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
+        updatePVboard(p1.board.board);
         checkShipsDone(p1, p2);
       }
       break;
@@ -104,6 +110,7 @@ addButton.addEventListener('click', () => {
             shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
+        updatePVboard(p1.board.board);
         checkShipsDone(p1, p2);
       }
       break;
@@ -121,6 +128,7 @@ addButton.addEventListener('click', () => {
           if (shipSelector.options[i].value == 'patrol') shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
+        updatePVboard(p1.board.board);
         checkShipsDone(p1, p2);
       }
       break;

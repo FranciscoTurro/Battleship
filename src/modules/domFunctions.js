@@ -2,6 +2,22 @@ import ship from './ship.js';
 
 const fleet = [null, ship(5), ship(4), ship(3), ship(3), ship(2)];
 
+const makePVboard = (p1) => {
+  for (let i = 0; i < 10; i++) {
+    let row = document.createElement('div');
+    row.classList.add('row-pv');
+    row.setAttribute('id', `pv-row${i}`);
+    document.getElementById('pvBoard').appendChild(row);
+
+    p1.board.board[i].forEach((e, foreachIndex) => {
+      let cell = document.createElement('div');
+      cell.classList.add('cell-pv');
+      cell.setAttribute('id', `pv-row${i}-cell${foreachIndex}`);
+      row.appendChild(cell);
+    });
+  }
+};
+
 const makeTwoBoards = (p1, p2) => {
   //SAME CODE TWO TIMES LIKE A NEANDERTHAL, TRY TO KEEP IT DRY
   for (let i = 0; i < 10; i++) {
@@ -42,7 +58,7 @@ const makeTwoBoards = (p1, p2) => {
             if (p2.board.allShipsSunk()) {
               p1.turn = false;
               p2.turn = false;
-              gameOver();
+              gameOver(p1);
             } else {
               p2.setTurn(p1);
               announceTurn(p1, p2);
@@ -68,11 +84,11 @@ const announceTurn = (p1, p2) => {
   }
 };
 
-const gameOver = () => {
+const gameOver = (winner) => {
   const announcer = document.querySelector('.announcer');
   announcer.classList.remove(...announcer.classList);
   announcer.classList.add('announcer');
-  announcer.innerHTML = 'Fin de la partida';
+  announcer.innerHTML = `Fin de la partida, ganador ${winner.name}`;
   console.log('work');
 };
 
@@ -108,6 +124,16 @@ const updateBoard = (board) => {
     for (let j = 0; j < 10; j++) {
       if (board[i][j] !== 'reserved' && board[i][j] !== false) {
         document.getElementById(`p1-row${i}-cell${j}`).classList.add('hit');
+      }
+    }
+  }
+};
+
+const updatePVboard = (board) => {
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      if (board[i][j] !== 'reserved' && board[i][j] !== false) {
+        document.getElementById(`pv-row${i}-cell${j}`).classList.add('hit');
       }
     }
   }
@@ -164,7 +190,7 @@ const p2Moves = async (p1, p2) => {
   if (p1.board.allShipsSunk()) {
     p1.turn = false;
     p2.turn = false;
-    gameOver();
+    gameOver(p2);
   } else {
     p1.setTurn(p2);
     announceTurn(p1, p2);
@@ -177,4 +203,6 @@ export {
   updateBoard,
   updateBoardTroubleshooting,
   checkShipsDone,
+  makePVboard,
+  updatePVboard,
 };

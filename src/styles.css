@@ -30,7 +30,6 @@ body {
   grid-template-rows: repeat(10, 1fr);
   width: 400px;
   height: 400px;
-  grid-row: 1/2;
 }
 
 .announcer {
@@ -38,28 +37,38 @@ body {
   color: white;
 }
 
+#pvBoard {
+  background-color: rgb(200, 200, 200);
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  width: 250px;
+  height: 250px;
+}
+
 .row-p1,
-.row-p2 {
+.row-p2,
+.row-pv {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   border: 1px solid rgb(30, 30, 30);
 }
 
 .cell-p1,
-.cell-p2 {
+.cell-p2,
+.cell-pv {
   border: 1px solid rgb(30, 30, 30);
 }
 
 .hit {
-  background-color: black;
+  background-color: #209cee;
 }
 
 .hitOwn {
-  background-color: blue;
+  background-color: #e76e55;
 }
 
 .miss {
-  background-color: red;
+  background-color: black;
 }
 
 .hide {
@@ -86,6 +95,6 @@ body {
   gap: 15px;
   padding: 30px;
   background-color: black;
-  margin: 10%;
+  margin: 5%;
   border-radius: 1em;
 }
