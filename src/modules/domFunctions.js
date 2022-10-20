@@ -42,8 +42,10 @@ const makeTwoBoards = (p1, p2) => {
             if (p2.board.allShipsSunk()) {
               p1.turn = false;
               p2.turn = false;
+              gameOver();
             } else {
               p2.setTurn(p1);
+              announceTurn(p1, p2);
               p2Moves(p1, p2);
             }
           }
@@ -51,6 +53,18 @@ const makeTwoBoards = (p1, p2) => {
       });
     });
   }
+};
+
+const announceTurn = (p1, p2) => {
+  const announcer = document.querySelector('.announcer');
+  if (p1.turn === true) announcer.innerHTML = 'Turno del jugador 1';
+  else announcer.innerHTML = 'Turno del jugador 2';
+};
+
+const gameOver = () => {
+  const announcer = document.querySelector('.announcer');
+  announcer.innerHTML = 'Fin de la partida';
+  console.log('work');
 };
 
 function searchForArray(arrayA, arrayB) {
@@ -103,14 +117,25 @@ const updateBoardTroubleshooting = (board) => {
 const shipSelector = document.querySelector('#shipSelector');
 const modalButton = document.querySelector('.modalButton');
 const modalContainer = document.querySelector('#modalContainer');
-const checkShipsDone = () => {
+const checkShipsDone = (p1, p2) => {
   if (shipSelector.options.length === 0) {
     modalContainer.style.display = 'none';
     modalButton.classList.add('hide');
+    p1.setTurn(p2);
+    announceTurn(p1, p2);
   }
 };
 
-const p2Moves = (p1, p2) => {
+function delay(delayInMs) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(2);
+    }, delayInMs);
+  });
+}
+
+const p2Moves = async (p1, p2) => {
+  await delay(700);
   let ran1;
   let ran2;
   do {
@@ -130,7 +155,11 @@ const p2Moves = (p1, p2) => {
   if (p1.board.allShipsSunk()) {
     p1.turn = false;
     p2.turn = false;
-  } else p1.setTurn(p2);
+    gameOver();
+  } else {
+    p1.setTurn(p2);
+    announceTurn(p1, p2);
+  }
 };
 
 export {

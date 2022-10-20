@@ -49,7 +49,7 @@ addButton.addEventListener('click', () => {
             shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
-        checkShipsDone();
+        checkShipsDone(p1, p2);
       }
       break;
 
@@ -67,7 +67,7 @@ addButton.addEventListener('click', () => {
             shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
-        checkShipsDone();
+        checkShipsDone(p1, p2);
       }
       break;
 
@@ -85,7 +85,7 @@ addButton.addEventListener('click', () => {
             shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
-        checkShipsDone();
+        checkShipsDone(p1, p2);
       }
       break;
 
@@ -103,7 +103,7 @@ addButton.addEventListener('click', () => {
             shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
-        checkShipsDone();
+        checkShipsDone(p1, p2);
       }
       break;
 
@@ -120,7 +120,7 @@ addButton.addEventListener('click', () => {
           if (shipSelector.options[i].value == 'patrol') shipSelector.remove(i);
         }
         updateBoard(p1.board.board);
-        checkShipsDone();
+        checkShipsDone(p1, p2);
       }
       break;
   }
