@@ -1,6 +1,6 @@
 const gameBoard = () => {
   let board = [];
-  let missedShots = [];
+  let missedShots = []; //used to be missedShots
   let placedShips = [];
   let hitShots = [];
 
@@ -67,7 +67,10 @@ const gameBoard = () => {
   };
 
   const receiveAttack = (xCoord, yCoord) => {
-    if (board[xCoord][yCoord] === 'reserved') return 'nothing';
+    if (board[xCoord][yCoord] === 'reserved') {
+      missedShots.push([xCoord, yCoord]);
+      return 'nothing';
+    }
     if (board[xCoord][yCoord] && board[xCoord][yCoord] !== 'missed') {
       board[xCoord][yCoord].ship.hit(board[xCoord][yCoord].pos);
       hitShots.push([xCoord, yCoord]);

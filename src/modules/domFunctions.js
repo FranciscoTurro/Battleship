@@ -32,16 +32,36 @@ const makeTwoBoards = (p1, p2) => {
 
       cell.addEventListener('click', (e) => {
         if (p1.turn === true) {
-          let attack = p2.board.receiveAttack(i, foreachIndex);
-          if (attack === 'hit') e.target.classList.add('hit');
-          if (attack !== 'hit') e.target.classList.add('miss');
-          p2.setTurn(p1);
-          p2Moves(p1, p2);
+          if (
+            searchForArray(p2.board.missedShots, [i, foreachIndex]) === false &&
+            searchForArray(p2.board.hitShots, [i, foreachIndex]) === false
+          ) {
+            let attack = p2.board.receiveAttack(i, foreachIndex);
+            if (attack === 'hit') e.target.classList.add('hit');
+            if (attack !== 'hit') e.target.classList.add('miss');
+            if (p2.board.allShipsSunk()) alert('es');
+            else {
+              p2.setTurn(p1);
+              p2Moves(p1, p2);
+            }
+          }
         }
       });
     });
   }
 };
+
+function searchForArray(arrayA, arrayB) {
+  let i, j, current;
+  for (i = 0; i < arrayA.length; ++i) {
+    if (arrayB.length === arrayA[i].length) {
+      current = arrayA[i];
+      for (j = 0; j < arrayB.length && arrayB[j] === current[j]; ++j);
+      if (j === arrayB.length) return true;
+    }
+  }
+  return false;
+}
 
 const placeShipsAtRandom = (board) => {
   const orientations = ['v', 'h'];
@@ -89,8 +109,15 @@ const checkShipsDone = () => {
 };
 
 const p2Moves = (p1, p2) => {
-  const ran1 = Math.floor(Math.random() * 9);
-  const ran2 = Math.floor(Math.random() * 9);
+  let ran1;
+  let ran2;
+  do {
+    ran1 = Math.floor(Math.random() * 10);
+    ran2 = Math.floor(Math.random() * 10);
+  } while (
+    searchForArray(p1.board.missedShots, [ran1, ran2]) === true ||
+    searchForArray(p1.board.hitShots, [ran1, ran2]) === true
+  );
   if (p1.board.receiveAttack(ran1, ran2) !== 'hit') {
     document.getElementById(`p1-row${ran1}-cell${ran2}`).classList.add('miss');
   } else {
@@ -98,9 +125,8 @@ const p2Moves = (p1, p2) => {
       .getElementById(`p1-row${ran1}-cell${ran2}`)
       .classList.add('hitOwn');
   }
-  console.log(p1.board);
-  console.log(p2.board);
-  p1.setTurn(p2);
+  if (p1.board.allShipsSunk()) alert('done');
+  else p1.setTurn(p2);
 };
 
 export {
