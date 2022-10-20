@@ -39,8 +39,10 @@ const makeTwoBoards = (p1, p2) => {
             let attack = p2.board.receiveAttack(i, foreachIndex);
             if (attack === 'hit') e.target.classList.add('hit');
             if (attack !== 'hit') e.target.classList.add('miss');
-            if (p2.board.allShipsSunk()) alert('es');
-            else {
+            if (p2.board.allShipsSunk()) {
+              p1.turn = false;
+              p2.turn = false;
+            } else {
               p2.setTurn(p1);
               p2Moves(p1, p2);
             }
@@ -125,8 +127,10 @@ const p2Moves = (p1, p2) => {
       .getElementById(`p1-row${ran1}-cell${ran2}`)
       .classList.add('hitOwn');
   }
-  if (p1.board.allShipsSunk()) alert('done');
-  else p1.setTurn(p2);
+  if (p1.board.allShipsSunk()) {
+    p1.turn = false;
+    p2.turn = false;
+  } else p1.setTurn(p2);
 };
 
 export {

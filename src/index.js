@@ -24,10 +24,9 @@ const orientationSelector = document.querySelector('#orientation');
 const shipSelector = document.querySelector('#shipSelector');
 
 modalButton.addEventListener('click', () => {
-  // modalContainer.style.display = 'block';
+  modalContainer.style.display = 'block';
   placeShipsAtRandom(p2.board);
   console.log(p2.board);
-  placeShipsAtRandom(p1.board); //remove this and uncomment the thing up
   p1.setTurn(p2);
 });
 
