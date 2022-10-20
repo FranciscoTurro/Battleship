@@ -57,12 +57,21 @@ const makeTwoBoards = (p1, p2) => {
 
 const announceTurn = (p1, p2) => {
   const announcer = document.querySelector('.announcer');
-  if (p1.turn === true) announcer.innerHTML = 'Turno del jugador 1';
-  else announcer.innerHTML = 'Turno del jugador 2';
+  if (p1.turn === true) {
+    announcer.innerHTML = 'Turno del jugador 1';
+    announcer.classList.remove(...announcer.classList);
+    announcer.classList.add('announcer', 'nes-text', 'is-primary');
+  } else {
+    announcer.innerHTML = 'Turno del jugador 2';
+    announcer.classList.remove(...announcer.classList);
+    announcer.classList.add('announcer', 'nes-text', 'is-error');
+  }
 };
 
 const gameOver = () => {
   const announcer = document.querySelector('.announcer');
+  announcer.classList.remove(...announcer.classList);
+  announcer.classList.add('announcer');
   announcer.innerHTML = 'Fin de la partida';
   console.log('work');
 };
@@ -120,7 +129,7 @@ const modalContainer = document.querySelector('#modalContainer');
 const checkShipsDone = (p1, p2) => {
   if (shipSelector.options.length === 0) {
     modalContainer.style.display = 'none';
-    modalButton.classList.add('hide');
+    modalButton.remove();
     p1.setTurn(p2);
     announceTurn(p1, p2);
   }

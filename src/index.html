@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/nes.css/css/nes.min.css" />
   </head>
   <body>
     <div id="main">
-      <div class="announcer">Ready to start the game.</div>
-      <button class="modalButton">Start game</button>
+      <span class="announcer">Ready to start the game</span>
+      <button class="modalButton nes-btn is-warning">Start game</button>
       <div id="content">
         <div id="container1">
           <div id="board1" class="board"></div>
@@ -25,23 +26,37 @@
         <span>
           Warning! The coordinates are where the first piece (from the top)
           <br />
-          of the ship will be placed, so think accordingly.
+          of the ship will be placed, so think accordingly
         </span>
         <div class="shipToPlace"></div>
-        <input type="text" id="xSelector" placeholder="X Coordinate" />
-        <input type="text" id="ySelector" placeholder="Y Coordinate" />
-        <select id="orientation">
-          <option value="h">Horizontal</option>
-          <option value="v">Vertical</option>
-        </select>
-        <select id="shipSelector">
-          <option value="carrier">Carrier (length 5)</option>
-          <option value="battleship">Battleship (length 4)</option>
-          <option value="destroyer">Destroyer (length 3)</option>
-          <option value="submarine">Submarine (length 3)</option>
-          <option value="patrol">Patrol boat (length 2)</option>
-        </select>
-        <button id="addButton">Place ship</button>
+        <input
+          class="nes-input is-dark"
+          type="text"
+          id="xSelector"
+          placeholder="X Coordinate"
+        />
+        <input
+          class="nes-input is-dark"
+          type="text"
+          id="ySelector"
+          placeholder="Y Coordinate"
+        />
+        <div class="nes-select is-dark">
+          <select id="orientation">
+            <option value="h">Horizontal</option>
+            <option value="v">Vertical</option>
+          </select>
+        </div>
+        <div class="nes-select is-dark">
+          <select id="shipSelector">
+            <option value="carrier">Carrier (length 5)</option>
+            <option value="battleship">Battleship (length 4)</option>
+            <option value="destroyer">Destroyer (length 3)</option>
+            <option value="submarine">Submarine (length 3)</option>
+            <option value="patrol">Patrol boat (length 2)</option>
+          </select>
+        </div>
+        <button id="addButton" class="nes-btn is-error">Place ship</button>
       </div>
     </div>
   </body>

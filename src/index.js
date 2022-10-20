@@ -1,6 +1,7 @@
 import './styles.css';
 import player from './modules/player.js';
 import ship from './modules/ship.js';
+import 'nes.css/css/nes.min.css';
 
 import {
   placeShipsAtRandom,
