@@ -7,17 +7,25 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="announcer">Ready to start the game.</div>
-    <div id="board1" class="board"></div>
-    <br />
-    <div id="board2" class="board"></div>
-    <button class="modalButton">Start game</button>
+    <div id="main">
+      <div class="announcer">Ready to start the game.</div>
+      <button class="modalButton">Start game</button>
+      <div id="content">
+        <div id="container1">
+          <div id="board1" class="board"></div>
+        </div>
+        <div id="container2">
+          <div id="board2" class="board"></div>
+        </div>
+      </div>
+    </div>
 
     <div id="modalContainer">
       <div class="modal">
         <span>
-          Warning! The coordinates are where the first piece (from the top) of
-          the ship will be placed, so think accordingly.
+          Warning! The coordinates are where the first piece (from the top)
+          <br />
+          of the ship will be placed, so think accordingly.
         </span>
         <div class="shipToPlace"></div>
         <input type="text" id="xSelector" placeholder="X Coordinate" />

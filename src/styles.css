@@ -1,21 +1,46 @@
+body {
+}
+
+.modalButton {
+  font-size: 1.3rem;
+}
+
+#main {
+  gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#content {
+  display: flex;
+  gap: 8rem;
+}
+
 .board {
+  background-color: white;
   border: 1px solid black;
   display: grid;
   grid-template-rows: repeat(10, 1fr);
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
+  grid-row: 1/2;
+}
+
+.announcer {
+  font-size: 2rem;
 }
 
 .row-p1,
 .row-p2 {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  border: 1px solid black;
+  border: 1px solid rgb(30, 30, 30);
 }
 
 .cell-p1,
 .cell-p2 {
-  border: 1px solid black;
+  border: 1px solid rgb(30, 30, 30);
 }
 
 .hit {
@@ -28,6 +53,10 @@
 
 .miss {
   background-color: red;
+}
+
+.hide {
+  display: none;
 }
 
 #modalContainer {
@@ -46,9 +75,9 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   padding: 30px;
   background-color: #e8e8e8;
-  margin: 15%;
+  margin: 10%;
   border-radius: 1em;
 }
